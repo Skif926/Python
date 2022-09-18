@@ -14,7 +14,15 @@ def startenter(b):
         print('Введите', b, 'или чтобы закончить введите \'стоп слово\'')
         a = input()
         if a == 'стоп слово':
-            return str
+            if (b == 'существительное' and len(str)>=2) or (b == 'глагол' and len(str)>=1):
+                return str
+            else:
+                print('Не получится ни одной фразы добавьте слов')
+                continue
+        if a == '':
+            print('Пусто запись не будет добавлена')
+            continue
+
         str.append(a)
 
 

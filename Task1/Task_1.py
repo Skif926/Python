@@ -136,7 +136,8 @@ def calcul():
     return True
 
 
-while calcul():
-    time.sleep(1)
-    clear()
-    continue
+if __name__ == '__main__':
+    while calcul():
+        time.sleep(1)
+        clear()
+        continue

@@ -23,30 +23,98 @@
 
 pop = 100
 agr = 1200
-heav = 0
+heavy = 0
 ligh = 0
 VPK = 0
 fight = 0
 popl = pop
-while True:
-    popl = pop
-    fight = agr + heav + ligh
-    print("Введите % населения для работы в тяжелой промышленности, остальные пойдут в сельское хозяйство. Всего населения:", pop)
-    n = (int)(input())
-    heav += agr * (n/100 * popl)
-    popl -= n * popl
-    agr = popl * 12
-    print("Тяжелая промышленность =", heav)
-    heavl = heav
-    n = (int)(input("Введите % тяжелой промышленности для производства легкой промышленности\n"))
-    ligh = (heavl * n / 100)/10 - pop * 10
-    heavl -= n/100 *  heavl
-    print("Легкая промышленность =", ligh)
-    pop *= 1 + ligh/1000
-    print("Введите % тяжелой промышленности для производства ВПК остатки уйдут в запас\n "
-              "Осталось нераспределённой Тяжелой промышленности", heavl)
-    n = (int)(input())
-    VPK = n/100 * heavl - fight
-    heavl =
-    heav += heavl
-    print(VPK)
+popfree = 0
+
+
+class Game:
+    def __init__(self):
+        self.pop = 100
+        self.agr = 1200
+        self.heavy = 0
+        self.ligh = 0
+        self.VPK = 0
+        self.fight = 0
+        self.fight = 0
+
+    def start(self):
+        while True:
+            self.VPK = 0
+            self.setfight()
+            self.setheavy()
+            while True:
+                x = input(f'Выделите % тяжелой промышленности({self.heavy:.2f}) для Сельского хозяйства :')
+                if 100 >= int(x) >= 0:
+                    break
+            self.setagr(int(x) / 100 * self.heavy)
+            self.heavy -= int(x) / 100 * self.heavy
+            while True:
+                x = input(
+                    f'Выделите % тяжелой промышленности({self.heavy:.2f}) для Легкой промышленности(Осталось:{self.ligh:.2f}/Нужно:{self.pop * 3:.2f}) :')
+                if 100 >= int(x) >= 0:
+                    break
+            self.setlight(int(x) / 100 * self.heavy)
+            self.heavy -= int(x) / 100 * self.heavy
+            while True:
+                x = input(
+                    f'Выделите % тяжелой промышленности({self.heavy:.2f}) для Военно промышленный комплекса(Нужно:{self.fight:.2f}) :')
+                if 100 >= int(x) >= 0:
+                    break
+            self.setVKK(int(x) / 100 * self.heavy)
+            self.decVKK()
+            self.heavy -= int(x) / 100 * self.heavy
+            self.declight()
+            print(f'Население потратило легкую промышленность {self.pop * 3:.2f} осталось {self.ligh:.2f}')
+            self.setpop()
+            if self.ligh < 0:
+                print('Вы проиграли населению нечего есть')
+                break
+            if self.VPK < 0:
+                print('Вы проиграли войну')
+                break
+            if self.VPK - 1000 > self.fight * 100:
+                print('Вы выиграли !')
+                break
+
+    def setagr(self, x):
+        self.agr = x * self.pop / 10
+
+    def setheavy(self):
+        self.heavy += self.agr * 0.1 * (1 + self.pop * 0.1)
+
+    def setlight(self, x):
+        self.ligh += x
+
+    def declight(self):
+        self.ligh -= self.pop * 3
+
+    def setVKK(self, x):
+        self.VPK = x
+
+    def decVKK(self):
+        self.VPK -= self.fight
+
+    def setpop(self):
+        if 0 < self.ligh <= self.pop * 3 * 1.5:
+            self.pop = int(self.pop * 1.1)
+            print(f'Население почти не изменилось: {self.pop}')
+        elif self.pop * 3 * 1.5 < self.ligh <= self.pop * 3 * 3:
+            self.pop = int(self.pop * 1.5)
+            print(f'Население изменилось: {self.pop}')
+        elif self.pop * 3 * 3 < self.ligh <= self.pop * 3 * 4:
+            self.pop = int(self.pop * 2.5)
+            print(f'Население сильно изменилось: {self.pop}')
+        elif self.ligh > self.pop * 3 * 4:
+            self.pop = int(self.pop * 3 + self.ligh * 0.001)
+            print(f'Население очень сильно изменилось: {self.pop}')
+
+    def setfight(self):
+        self.fight = self.fight * 1.3 + self.ligh * 0.2 + self.agr * 0.5 + self.pop * 4 - 1000
+
+
+A = Game()
+A.start()

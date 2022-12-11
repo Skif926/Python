@@ -33,9 +33,11 @@ def userinput(*b):
             return a
         elif a.isdigit() and len(b) == 2:
             return a
-        elif is_digit(a) and a.isdigit() == False and len(b) == 2:
+        elif is_digit(a) and a.isdigit() == False and len(b) == 2 and float(a) < 0:
             print('Это число отрицательное, в результате будет использовано положительное число')
             return float(a) * (-1)
+        elif is_digit(a) and a.isdigit() == False and len(b) == 2 and float(a) >= 0:
+            return float(a)
         else:
             print('Error\n'
                   'Некорректный ввод')

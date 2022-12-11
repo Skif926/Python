@@ -6,7 +6,7 @@
 '''
 import os
 from time import sleep
-from Task1.Task_1 import is_digit
+from Practica_1.Task1.Task_1 import is_digit
 from ClassTimer import MyTimer
 
 

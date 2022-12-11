@@ -7,16 +7,6 @@
 минимальное отличие от “эталонного” слова.
 '''
 
-import os
-import time
-import threading
-from threading import Thread
-
-str = "Hello world! What a lovely day"
-str = str.split()
-print(str[0])
-str = " + ".join(str)
-print(str)
 
 def check(dictionarylocal, inputstr):
     a = []
@@ -58,18 +48,7 @@ userinput = 'коiка собака сабака летучая мышь и ха
 print('Пользоватеьский ввод:', userinput)
 treatmentinput = []
 treatmentinput = userinput.split()
-# print(dictionary[0][2])
 for i in range(len(treatmentinput)):
     if treatmentinput[i] not in dictionary:
-        # thcheck = Thread(target=check, args=(dictionary,treatmentinput[i]))
-        # thcheck.start()
         treatmentinput[i] = check(dictionary, treatmentinput[i])
 print('Обработанный вывод:', " ".join(treatmentinput))
-'''for j in range(100):
-    A = Thread(target=ao)
-    A.start()'''
-
-# Cоздаем только четыре потока
-'''for i in range(10):
-    th = Thread(target=sleepMe, args=(i, ))
-    th.start()'''

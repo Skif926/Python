@@ -22,16 +22,16 @@ while True:
           'брус100 6\n'
           'доска25 6\n'
           'доска50 6\n'
-          'фанера1,5 1,5\n'
+          'фанера 1,5\n'
           'Пример заказа: брус50 1,5 x2 доска25 5 6\n'
           'Для выхода введите 0\n')
-    Order = Order()
+    Order = Order
     userinput = input()
     if userinput == '0':
         exit(0)
     userinput = userinput.split()
     count = 0
-    dictionary = ['брус50', 'брус100', 'доска25', 'доска50', 'фанера1,5']
+    dictionary = ['брус50', 'брус100', 'доска25', 'доска50', 'фанера']
     for i in range(len(userinput)):
         if userinput[i] in dictionary:
             count += 1
@@ -40,16 +40,19 @@ while True:
                 count += 1
                 i += 1
             userinput[i] = userinput[i].replace('x', '')
+            userinput[i] = userinput[i].replace('х', '')
             if is_digit(userinput[i]) and (int)(userinput[i]) > 0:
                 count += 1
                 if dictionary.index(userinput[i - 2]) == 0:
                     if (float)(userinput[i - 1]) > 3:
                         count -= 1
+                        print('магазин не предоставляет материал длинною больше', 3, '\n')
                         continue
-                    Order.incA((float)(userinput[i - 1]), (int)(userinput[i]))
+                    Order.inc(Order, userinput[i - 2], (float)(userinput[i - 1]), (int)(userinput[i]))
 
     if count != len(userinput):
         print('Error')
         print('Повторите ввод')
     else:
+        Order.counting(Order)
         break

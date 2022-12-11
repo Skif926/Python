@@ -36,17 +36,21 @@ while True:
     userinput = userinput.split()
     count = 0
     dictionary = ['h', 'H', 'm', 'M', 's', 'S']
-    for i in range(len(userinput)):
-        if userinput[i] in dictionary:
-            count += 1
-            i += 1
-            if is_digit(userinput[i]):
+    try:
+        for i in range(len(userinput)):
+            if userinput[i] in dictionary:
                 count += 1
-    if count != len(userinput):
+                i += 1
+                if is_digit(userinput[i]):
+                    count += 1
+        if count != len(userinput):
+            print('Error')
+            print('Повторите ввод')
+        else:
+            break
+    except IndexError:
         print('Error')
         print('Повторите ввод')
-    else:
-        break
 timewhait = 0
 for i in range(len(userinput)):
     if userinput[i] in dictionary:

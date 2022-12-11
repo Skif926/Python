@@ -12,7 +12,7 @@
 ответ калькулятора
 5х брус 50 3м
 '''
-from Task1.Task_1 import is_digit
+from Practica_1.Task1.Task_1 import is_digit
 from ClassOrder import Order
 
 while True:

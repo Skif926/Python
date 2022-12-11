@@ -26,7 +26,6 @@
 слаборазвитыми в одно отрасли по всем республикам)
 """
 import random
-
 from ClassRepublic import republic
 
 k = random.randint(1, 1000)

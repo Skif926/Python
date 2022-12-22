@@ -24,7 +24,7 @@ def userinput(*b):
     while True:
         print('Введите число')
         a = input()
-        if is_digit(a) and len(b) == 0:
+        if is_digit(a) and not b:
             if float(a) == inf:
                 print('Это число для меня слишком большое, я ведь только начинающий калькулятор')
                 continue
@@ -54,10 +54,7 @@ def is_digit(a):
 def continuecounting():
     print('Продолжить вычисления? (1,Y)')
     a = input()
-    if a == '1' or a == 'y' or a == 'Y':
-        return True
-    else:
-        return False
+    return a in ['1', 'y', 'Y']
 
 
 def calcul():

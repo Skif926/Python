@@ -10,6 +10,7 @@ import os
 import time
 from cmath import inf
 
+
 clear = lambda: os.system('cls')
 addition = lambda x, y: x + y
 subtraction = lambda x, y: x - y
